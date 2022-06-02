@@ -1,10 +1,13 @@
 package me.GamingCuber.MinuteDisaster.Commands;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -132,6 +135,9 @@ public class MinuteDisasterCommand implements TabExecutor {
 
 					switch (Randomizer) {
 
+					case 0:
+						plugin.Serv.broadcastMessage(ChatColor.GREEN + "You're lucky! No disaster this minute.");
+						break;
 					case 1:
 						plugin.Serv.broadcastMessage(ChatColor.BLUE + "Eating has now been disabled!");
 						plugin.CanEat = false;
@@ -291,7 +297,16 @@ public class MinuteDisasterCommand implements TabExecutor {
 
 								if (plugin.CompletedMessageGame) {
 									
+									plugin.Serv.broadcastMessage(ChatColor.GREEN + "Congrtas, you guys did it!");
 									
+								} else {
+									
+									plugin.Serv.broadcastMessage(ChatColor.RED + "Sorry, someone failed it!");
+									for (Player p : w.getPlayers()) {
+										
+										p.setHealth(0.0);
+										
+									}
 									
 								}
 								
@@ -299,7 +314,45 @@ public class MinuteDisasterCommand implements TabExecutor {
 
 						}.runTaskLater(plugin, 7 * 20L);
 						break;
-
+					case 12:
+						for (Player p : w.getPlayers()) {
+							
+							p.setFireTicks(30 * 20);
+							
+						}
+						plugin.Serv.broadcastMessage(ChatColor.of(Color.orange) + "You have been set ablaze!");
+						break;
+					case 13:
+						for (Player p : w.getPlayers()) {
+							
+							Location PlayerNorth = p.getLocation().subtract(0, 0, 8);
+							Location PlayerSouth = p.getLocation().add(0, 0, 8);
+							Location PlayerEast = p.getLocation().add(8, 0, 0);
+							Location PlayerWest = p.getLocation().subtract(8, 0, 0);
+							ArrayList<Location> LocationList = new ArrayList<>();
+							LocationList.add(PlayerNorth);
+							LocationList.add(PlayerSouth);
+							LocationList.add(PlayerEast);
+							LocationList.add(PlayerWest);
+							for (int i = 0; i < 4; i++) {
+								
+								EntityType[] EntityList = EntityType.values();
+								EntityType RandomMob = EntityList[rand.nextInt(EntityList.length)];
+								w.spawnEntity(LocationList.get(i), RandomMob);
+								
+							}
+							
+						}
+						break;
+					case 14:
+						for (Player p : w.getPlayers()) {
+							
+							
+							
+						}
+						
+						
+						
 					}
 
 				}
