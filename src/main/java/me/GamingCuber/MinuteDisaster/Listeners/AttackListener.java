@@ -1,36 +1,36 @@
 package me.GamingCuber.MinuteDisaster.Listeners;
 
+import me.GamingCuber.MinuteDisaster.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import me.GamingCuber.MinuteDisaster.Main;
 
 public class AttackListener implements Listener {
 
-	private Main plugin;
+    private Main plugin;
 
-	public AttackListener(Main plugin) {
+    public AttackListener(Main plugin) {
 
-		this.plugin = plugin;
-		Bukkit.getPluginManager().registerEvents(this, plugin);
+        this.plugin = plugin;
+        Bukkit.getPluginManager().registerEvents(this, plugin);
 
-	}
+    }
 
-	@EventHandler
-	public void onAttack(EntityDamageByEntityEvent e) {
+    @EventHandler
+    public void onAttack(EntityDamageByEntityEvent e) {
 
-		if (e.getDamager().getType().equals(EntityType.PLAYER) && !plugin.CanAttack) {
+        if (e.getDamager().getType().equals(EntityType.PLAYER) && !plugin.CanAttack) {
 
-			e.setCancelled(true);
+            e.setCancelled(true);
 
-		} else {
+        } else {
 
-			e.setCancelled(false);
+            e.setCancelled(false);
 
-		}
+        }
 
-	}
+    }
 
 }

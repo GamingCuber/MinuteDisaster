@@ -1,36 +1,35 @@
 package me.GamingCuber.MinuteDisaster.Listeners;
 
+import me.GamingCuber.MinuteDisaster.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
-import me.GamingCuber.MinuteDisaster.Main;
-
 public class EatListener implements Listener {
 
-	private Main plugin;
+    private Main plugin;
 
-	public EatListener(Main plugin) {
+    public EatListener(Main plugin) {
 
-		this.plugin = plugin;
-		Bukkit.getPluginManager().registerEvents(this, plugin);
+        this.plugin = plugin;
+        Bukkit.getPluginManager().registerEvents(this, plugin);
 
-	}
+    }
 
-	@EventHandler
-	public void onEat(PlayerItemConsumeEvent e) {
+    @EventHandler
+    public void onEat(PlayerItemConsumeEvent e) {
 
-		if (plugin.CanEat) {
+        if (plugin.CanEat) {
 
-			e.setCancelled(false);
+            e.setCancelled(false);
 
-		} else {
+        } else {
 
-			e.setCancelled(true);
+            e.setCancelled(true);
 
-		}
+        }
 
-	}
+    }
 
 }
