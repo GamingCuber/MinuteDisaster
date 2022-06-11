@@ -3,5 +3,8 @@ main: me.GamingCuber.MinuteDisaster.Main
 description: A plugin that causes something bad to happen every minute!
 author: GamingCuber
 version: 1.0
-depend: [ ProtocolLib ]
+api-version: 1.19
+
+commands:
+  disaster:
 

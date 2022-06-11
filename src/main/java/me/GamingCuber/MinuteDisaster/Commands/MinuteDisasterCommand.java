@@ -28,7 +28,7 @@ public class MinuteDisasterCommand implements TabExecutor {
     public MinuteDisasterCommand(Main plugin) {
 
         this.plugin = plugin;
-        plugin.getCommand("minutedisaster").setExecutor(this);
+        plugin.getCommand("disaster").setExecutor(this);
 
     }
 
@@ -373,14 +373,29 @@ public class MinuteDisasterCommand implements TabExecutor {
             }.runTaskTimer(plugin, 70 * 20L, 60 * 20L);
 
         } else if (args[0].equalsIgnoreCase("stop")) {
-
+            //code that manages the stop argument
             BukkitScheduler sched = plugin.Serv.getScheduler();
             sched.cancelTasks(plugin);
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "The dis  asters has stopped!");
 
         } else if (args[0].equalsIgnoreCase("help")) {
-
-
+            //code that manages the help argument
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "1. Nothing");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "2. No Eating");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "3. Spawns a Ravager");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "4. Spawns an Anvil 15 blocks above");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "5. Summons 10 Skeletons");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "6. Mining Fatigue is applied");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "7. Inventory Click Game");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "8. Removes Random item from Inventory");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "9. Nauseau is applied");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "10. Levitation is applied");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "11. Inability to attack");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "12. Chat Typing Game");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "13. All players are set ablaze");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "14. Random mob in each cardinal direction");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "15. Shuffles items in inventory");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "16. Nothing, sometimes :) ");
 
 		}
 

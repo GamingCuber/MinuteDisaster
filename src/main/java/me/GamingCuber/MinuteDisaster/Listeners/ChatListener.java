@@ -24,6 +24,7 @@ public class ChatListener implements Listener {
         if (plugin.MessageGameActive && e.getMessage().equals(plugin.GoalWord)) {
 
             e.getPlayer().sendMessage(ChatColor.GREEN + "Congrats, you did it!");
+            plugin.CompletedMessageGame = true;
 
         }
 
