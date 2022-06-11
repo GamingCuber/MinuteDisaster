@@ -281,8 +281,10 @@ public class MinuteDisasterCommand implements TabExecutor {
                             break;
                         case 11:
                             plugin.CompletedMessageGame = false;
-                            ArrayList<String> WordList = new ArrayList<>();
-                            plugin.GoalWord = WordList.get(rand.nextInt(WordList.size()));
+							ArrayList <Object> WordList = new ArrayList<>();
+							WordList.addAll(Arrays.asList(EntityType.values()));
+							WordList.addAll(Arrays.asList(Material.values()));
+                            plugin.GoalWord = WordList.get(rand.nextInt(WordList.size())).toString().toLowerCase().replace('_', ' ');
                             plugin.Serv.broadcastMessage(ChatColor.AQUA + "You must send the message in chat " + ChatColor.GREEN + "\"" + plugin.GoalWord + "\"");
                             new BukkitRunnable() {
 
