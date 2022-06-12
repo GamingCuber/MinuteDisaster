@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MinuteDisaster:jar">
+    <output-path>$USER_HOME$/Downloads/Plugins</output-path>
+    <root id="archive" name="MinuteDisaster.jar">
+      <element id="module-output" name="MinuteDisaster" />
+    </root>
+  </artifact>
+</component>

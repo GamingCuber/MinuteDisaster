@@ -1,5 +1,10 @@
 package me.GamingCuber.MinuteDisaster;
 
+import me.GamingCuber.MinuteDisaster.Commands.MinuteDisasterCommand;
+import me.GamingCuber.MinuteDisaster.Listeners.AttackListener;
+import me.GamingCuber.MinuteDisaster.Listeners.ChatListener;
+import me.GamingCuber.MinuteDisaster.Listeners.EatListener;
+import me.GamingCuber.MinuteDisaster.Listeners.InventoryClickListener;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.inventory.Inventory;
@@ -19,12 +24,18 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+//TODO 6 and 14
+        new MinuteDisasterCommand(this);
+        new AttackListener(this);
+        new ChatListener(this);
+        new EatListener(this);
+        new InventoryClickListener(this);
 
     }
 
     @Override
     public void onDisable() {
+
 
 
     }

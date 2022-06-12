@@ -32,6 +32,7 @@ public class MinuteDisasterCommand implements TabExecutor {
 
     }
 
+    @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 
         if (args.length == 1) {
@@ -47,6 +48,7 @@ public class MinuteDisasterCommand implements TabExecutor {
         return null;
     }
 
+    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         final Random rand = new Random();
@@ -57,12 +59,15 @@ public class MinuteDisasterCommand implements TabExecutor {
         if (FirstArg.equalsIgnoreCase("start")) {
 
             // this is the first countdown runnable
+
             new BukkitRunnable() {
 
-                int cnt = 0;
+                int cnt = 11;
 
                 @Override
                 public void run() {
+
+                    cnt--;
 
                     if (cnt == 1) {
 
@@ -90,16 +95,21 @@ public class MinuteDisasterCommand implements TabExecutor {
                 @Override
                 public void run() {
 
+
+
                     new BukkitRunnable() {
 
-                        int cnt = 10;
+                        int cnt = 11;
 
                         public void run() {
+
+                            cnt--;
 
                             if (cnt == 0) {
 
                                 plugin.Serv.broadcastMessage(
                                         ChatColor.BOLD + "" + ChatColor.AQUA + "DISASTER HAS OCCURRED!");
+                                this.cancel();
 
                             } else if (cnt == 1) {
 
@@ -126,7 +136,6 @@ public class MinuteDisasterCommand implements TabExecutor {
                 public void run() {
 
                     int Randomizer = rand.nextInt(15);
-
                     switch (Randomizer) {
 
                         case 0:
@@ -134,14 +143,14 @@ public class MinuteDisasterCommand implements TabExecutor {
                             break;
                         case 1:
                             plugin.Serv.broadcastMessage(ChatColor.BLUE + "Eating has now been disabled!");
-                            plugin.CanEat = false;
+                            plugin.CanEat = true;
                             new BukkitRunnable() {
 
                                 @Override
                                 public void run() {
 
                                     plugin.Serv.broadcastMessage(ChatColor.AQUA + "You can now eat!");
-                                    plugin.CanEat = true;
+                                    plugin.CanEat = false;
 
                                 }
 
@@ -189,52 +198,54 @@ public class MinuteDisasterCommand implements TabExecutor {
                             plugin.Serv.broadcastMessage(
                                     ChatColor.AQUA + "Click the Block quickly in 5 seconds, otherwise you die!");
                             plugin.CompletedClickGame = false;
+                            ArrayList<Material> ClickGameList = new ArrayList<>();
+                            ClickGameList.add(Material.SPONGE);
+                            ClickGameList.add(Material.RAW_GOLD_BLOCK);
+                            ClickGameList.add(Material.HONEYCOMB_BLOCK);
+                            ClickGameList.add(Material.HORN_CORAL_BLOCK);
+                            ClickGameList.add(Material.GOLD_BLOCK);
+                            ClickGameList.add(Material.GOLD_INGOT);
+                            ClickGameList.add(Material.GOLD_NUGGET);
+                            ClickGameList.add(Material.GOLD_ORE);
+                            plugin.GoalBlock = ClickGameList.get(rand.nextInt(ClickGameList.size()));
+
                             for (Player p : w.getPlayers()) {
 
-                                ArrayList<Material> ClickGameList = new ArrayList<>();
-                                ClickGameList.add(Material.SPONGE);
-                                ClickGameList.add(Material.RAW_GOLD_BLOCK);
-                                ClickGameList.add(Material.HONEYCOMB_BLOCK);
-                                ClickGameList.add(Material.HORN_CORAL_BLOCK);
-                                ClickGameList.add(Material.GOLD_BLOCK);
-                                ClickGameList.add(Material.GOLD_INGOT);
-                                ClickGameList.add(Material.GOLD_NUGGET);
-                                ClickGameList.add(Material.GOLD_ORE);
-                                plugin.GoalBlock = ClickGameList.get(rand.nextInt(ClickGameList.size()));
-                                plugin.ClickGame = plugin.Serv.createInventory(p, 81,
+                                plugin.ClickGame = plugin.Serv.createInventory(p, 54,
                                         "Click the " + plugin.GoalBlock.name().replace('_', ' ').toLowerCase() + "!");
-                                for (int i = 0; i < ClickGameList.size(); i++) {
+                                for (int i = 0; i < 54; i++) {
 
                                     Material GeneratorBlock = ClickGameList.get(rand.nextInt(ClickGameList.size()));
                                     plugin.ClickGame.setItem(i, new ItemStack(GeneratorBlock));
 
                                 }
-                                new BukkitRunnable() {
+                                p.openInventory(plugin.ClickGame);
+                            }
+                            new BukkitRunnable() {
 
-                                    @Override
-                                    public void run() {
+                                @Override
+                                public void run() {
 
-                                        if (plugin.CompletedClickGame) {
+                                    if (plugin.CompletedClickGame) {
 
-                                            plugin.Serv.broadcastMessage(ChatColor.BLUE + "Congrats, you guys did it!");
-                                            return;
+                                        plugin.Serv.broadcastMessage(ChatColor.BLUE + "Congrats, you guys did it!");
 
-                                        } else {
+                                    } else {
 
-                                            for (Player p : w.getPlayers()) {
+                                        for (Player p : w.getPlayers()) {
 
-                                                p.setHealth(0.0);
-                                                plugin.Serv.broadcastMessage(ChatColor.RED + "Sorry, you guys failed!");
-
-                                            }
+                                            p.setHealth(0.0);
+                                            plugin.Serv.broadcastMessage(ChatColor.RED + "Sorry, you guys failed!");
 
                                         }
 
                                     }
 
-                                }.runTaskLater(plugin, 5 * 20);
+                                }
 
-                            }
+                            }.runTaskLater(plugin, 5 * 20);
+
+
 
                             break;
                         case 7:
@@ -281,9 +292,10 @@ public class MinuteDisasterCommand implements TabExecutor {
                             break;
                         case 11:
                             plugin.CompletedMessageGame = false;
-							ArrayList <Object> WordList = new ArrayList<>();
-							WordList.addAll(Arrays.asList(EntityType.values()));
-							WordList.addAll(Arrays.asList(Material.values()));
+                            plugin.MessageGameActive = true;
+                            ArrayList<Object> WordList = new ArrayList<>();
+                            WordList.addAll(Arrays.asList(EntityType.values()));
+                            WordList.addAll(Arrays.asList(Material.values()));
                             plugin.GoalWord = WordList.get(rand.nextInt(WordList.size())).toString().toLowerCase().replace('_', ' ');
                             plugin.Serv.broadcastMessage(ChatColor.AQUA + "You must send the message in chat " + ChatColor.GREEN + "\"" + plugin.GoalWord + "\"");
                             new BukkitRunnable() {
@@ -291,9 +303,11 @@ public class MinuteDisasterCommand implements TabExecutor {
                                 @Override
                                 public void run() {
 
+                                    plugin.MessageGameActive = false;
+
                                     if (plugin.CompletedMessageGame) {
 
-                                        plugin.Serv.broadcastMessage(ChatColor.GREEN + "Congrtas, you guys did it!");
+                                        plugin.Serv.broadcastMessage(ChatColor.GREEN + "Congrats, you guys did it!");
 
                                     } else {
 
@@ -341,18 +355,19 @@ public class MinuteDisasterCommand implements TabExecutor {
                             }
                             break;
                         case 14:
+                            plugin.Serv.broadcastMessage(ChatColor.DARK_RED + "The goblins have shuffled your inventory!");
                             for (Player p : w.getPlayers()) {
 
                                 Inventory PlayerInventory = p.getInventory();
                                 List<ItemStack> ItemList = Arrays.asList(PlayerInventory.getContents());
                                 Collections.shuffle(ItemList);
-                                ItemStack[] ShuffledList = (ItemStack[]) ItemList.toArray();
+                                ItemStack[] ShuffledList = ItemList.toArray(new ItemStack[0]);
                                 PlayerInventory.setContents(ShuffledList);
 
                             }
                             break;
                         case 15:
-                            if (rand.nextInt(9) == 9) {
+                            if (rand.nextInt(9) == 8) {
 
                                 plugin.Serv.broadcastMessage(ChatColor.RED + ":)");
 
@@ -368,17 +383,17 @@ public class MinuteDisasterCommand implements TabExecutor {
 
                     }
 
-                }
+                    }
 
             }.runTaskTimer(plugin, 70 * 20L, 60 * 20L);
 
-        } else if (args[0].equalsIgnoreCase("stop")) {
+        } if (args[0].equalsIgnoreCase("stop")) {
             //code that manages the stop argument
             BukkitScheduler sched = plugin.Serv.getScheduler();
             sched.cancelTasks(plugin);
-            plugin.Serv.broadcastMessage(ChatColor.GREEN + "The dis  asters has stopped!");
+            plugin.Serv.broadcastMessage(ChatColor.GREEN + "The disasters has stopped!");
 
-        } else if (args[0].equalsIgnoreCase("help")) {
+        } if (args[0].equalsIgnoreCase("help")) {
             //code that manages the help argument
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "1. Nothing");
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "2. No Eating");
@@ -398,6 +413,8 @@ public class MinuteDisasterCommand implements TabExecutor {
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "16. Nothing, sometimes :) ");
 
 		}
+
+
 
         return false;
     }
