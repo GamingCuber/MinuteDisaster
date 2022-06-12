@@ -96,7 +96,6 @@ public class MinuteDisasterCommand implements TabExecutor {
                 public void run() {
 
 
-
                     new BukkitRunnable() {
 
                         int cnt = 11;
@@ -246,7 +245,6 @@ public class MinuteDisasterCommand implements TabExecutor {
                             }.runTaskLater(plugin, 5 * 20);
 
 
-
                             break;
                         case 7:
                             for (Player p : w.getPlayers()) {
@@ -383,17 +381,19 @@ public class MinuteDisasterCommand implements TabExecutor {
 
                     }
 
-                    }
+                }
 
             }.runTaskTimer(plugin, 70 * 20L, 60 * 20L);
 
-        } if (args[0].equalsIgnoreCase("stop")) {
+        }
+        if (args[0].equalsIgnoreCase("stop")) {
             //code that manages the stop argument
             BukkitScheduler sched = plugin.Serv.getScheduler();
             sched.cancelTasks(plugin);
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "The disasters has stopped!");
 
-        } if (args[0].equalsIgnoreCase("help")) {
+        }
+        if (args[0].equalsIgnoreCase("help")) {
             //code that manages the help argument
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "1. Nothing");
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "2. No Eating");
@@ -412,8 +412,7 @@ public class MinuteDisasterCommand implements TabExecutor {
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "15. Shuffles items in inventory");
             plugin.Serv.broadcastMessage(ChatColor.GREEN + "16. Nothing, sometimes :) ");
 
-		}
-
+        }
 
 
         return false;

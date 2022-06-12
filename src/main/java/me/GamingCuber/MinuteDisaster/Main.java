@@ -24,7 +24,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-//TODO 6 and 14
+
         new MinuteDisasterCommand(this);
         new AttackListener(this);
         new ChatListener(this);
@@ -35,7 +35,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
 
 
     }
