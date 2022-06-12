@@ -3,7 +3,9 @@ A Spigot Plugin that creates a disaster every minute.
 
 ## Commands:
 /disaster start = Starts the Plugin
+
 /disaster stop = Stops the Plugin
+
 /disaster help = Lists all the disasters
 
 ## How to Use
